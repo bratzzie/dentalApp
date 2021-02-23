@@ -1,23 +1,21 @@
 
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import styled from 'styled-components/native'
-const Group = ({title, items}) => {
+const Group = ({user, diagnosis, active, time, navigate}) => {
     return(
         
-<GroupSection>
-       <GroupTitle>{title}</GroupTitle>
-   
-        {items.map((item, index) =>     (<GroupItem key={index}>
+    <GroupSection onPress={navigate.bind(this, 'Patient')}>
+         <GroupItem>
          <Avatar
-         source={{uri: item.user.avatar}} />
+         source={{uri: user.avatar}} />
          <View style={{flex: 1}}>
-                <FullName>{item.user.fullname}</FullName>
-                <Info>{item.diagnosis}</Info>
+                <FullName>{user.fullname}</FullName>
+                <Info>{diagnosis}</Info>
          </View>
-         <GroupDate active={item.active}>{item.time}</GroupDate>
+         <GroupDate active={active}>{time}</GroupDate>
        </GroupItem>
-        ))}
+        
      </GroupSection>
     )
 };
@@ -56,12 +54,6 @@ font-size: 16px;
 color: #8b979f;
 `
 
-const GroupTitle = styled.Text`
-
-font-weight: 800;
-font-size: 22px;
-color : #000;
-`
 
 const GroupDate = styled.Text`
 background-color: ${props => (props.active ? '#2A86FF' : '#e9f5ff')};
@@ -73,5 +65,5 @@ font-size: 14px;
 width: 70px;
 height: 32px;
 text-align: center;
-line-height: 28px;
+line-height: 30px;
 `
